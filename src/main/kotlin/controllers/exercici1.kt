@@ -1,6 +1,5 @@
 package org.example.controllers
 import java.text.SimpleDateFormat
-import java.util.*
 
 
 /**
@@ -31,13 +30,12 @@ enum class TipusIVA {
     General,
     Reduit,
     Superreduit,
-    Exempt
 }
 
 fun main() {
     val preu = 100.0
     val tipusIVA = TipusIVA.General
-    val dataCompra = "20-06-1990"
+    val dataCompra = "20-06-1992"
 
     val preuAmbIVA = calcularIVA(preu, tipusIVA, dataCompra)
     println("El preu amb l'IVA aplicat és: $preuAmbIVA")
@@ -58,7 +56,7 @@ fun calcularIVA(preu: Double, tipusIVA: TipusIVA, dataCompra: String): Double {
     val dataCompraDate = dateFormat.parse(dataCompra)
 
     return when {
-        dataCompraDate.before(dataLimit1) -> preu
+        dataCompraDate.before(dataLimit1) -> preu * 12 / 100
         dataCompraDate.before(dataLimit2) -> {
             when (tipusIVA) {
                 TipusIVA.General -> preu * 12 / 100
@@ -71,7 +69,6 @@ fun calcularIVA(preu: Double, tipusIVA: TipusIVA, dataCompra: String): Double {
                 TipusIVA.General -> preu * 15 / 100
                 TipusIVA.Reduit -> preu * 6 / 100
                 TipusIVA.Superreduit -> preu * 3 / 100
-                else -> preu
             }
         }
         dataCompraDate.before(dataLimit4) -> {
@@ -79,7 +76,6 @@ fun calcularIVA(preu: Double, tipusIVA: TipusIVA, dataCompra: String): Double {
                 TipusIVA.General -> preu * 16 / 100
                 TipusIVA.Reduit -> preu * 7 / 100
                 TipusIVA.Superreduit -> preu * 4 / 100
-                else -> preu
             }
         }
         dataCompraDate.before(dataLimit5) -> {
@@ -87,7 +83,6 @@ fun calcularIVA(preu: Double, tipusIVA: TipusIVA, dataCompra: String): Double {
                 TipusIVA.General -> preu * 18 / 100
                 TipusIVA.Reduit -> preu * 8 / 100
                 TipusIVA.Superreduit -> preu * 4 / 100
-                else -> preu
             }
         }
         dataCompraDate.before(dataLimit6) -> {
@@ -95,7 +90,6 @@ fun calcularIVA(preu: Double, tipusIVA: TipusIVA, dataCompra: String): Double {
                 TipusIVA.General -> preu * 21 / 100
                 TipusIVA.Reduit -> preu * 10 / 100
                 TipusIVA.Superreduit -> preu * 4 / 100
-                else -> preu
             }
         }
         else -> preu
