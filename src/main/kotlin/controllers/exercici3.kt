@@ -14,6 +14,13 @@ import java.util.*
  *
  */
 
+/**
+ * Funció que valida si la contrasenya introduida per l'usuari és correcta
+ * @param scan Scanner per a llegir les dades de l'usuari
+ * @param contrasenya contrasenya a validar
+ * @return true si la contrasenya és correcta, false si no ho és
+ */
+
 fun validarSuperusuari(scan: Scanner, contrasenya: String): Boolean {
     var intents = 0 //creem la variable a 0 que serán els intents de l'usuari
     do {
@@ -29,6 +36,9 @@ fun validarSuperusuari(scan: Scanner, contrasenya: String): Boolean {
     return false
 }
 
+/**
+ * Funció principal que crida a la funció validarSuperusuari
+ */
 fun main() {
     val scan = Scanner(System.`in`)
     val contrasenya = "contrasenya"
