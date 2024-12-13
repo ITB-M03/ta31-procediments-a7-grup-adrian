@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat
  * 01-01-1993          15%      6%      3%              0%
  * 01-01-1995          16%      7%      4%              0%
  * 01-01-2010          18%      8%      4%              0%
- * 15-07-2012          21%      10%     4%              0% *
+ * 15-07-2012          21%      10%     4%              0%
  *
  */
 
@@ -25,11 +25,11 @@ import java.text.SimpleDateFormat
  * Enumeració dels diferents tipus d'IVA amb els seus percentatges corresponents.
  */
 
-
 enum class TipusIVA {
     General,
     Reduit,
     Superreduit,
+    //Exempt
 }
 
 fun main() {
@@ -38,11 +38,19 @@ fun main() {
     val dataCompra = "20-06-1992"
 
     val preuAmbIVA = calcularIVA(preu, tipusIVA, dataCompra)
-    println("El preu amb l'IVA aplicat és: $preuAmbIVA")
+    println("El preu amb l'IVA aplicat és: $preuAmbIVA%")
 }
 
 
 
+/**
+ * Funció que calcula l'IVA d'un preu en funció del tipus d'IVA i la data de compra.
+ * @param preu preu del producte
+ * @param tipusIVA tipus d'IVA a aplicar
+ * @param dataCompra data de la compra
+ * @param exempt boolean que indica si el producte està exempt de l'IVA
+ * @return preu amb l'IVA aplicat
+ */
 
 fun calcularIVA(preu: Double, tipusIVA: TipusIVA, dataCompra: String): Double {
     val dateFormat = SimpleDateFormat("dd-MM-yyyy")
@@ -69,6 +77,7 @@ fun calcularIVA(preu: Double, tipusIVA: TipusIVA, dataCompra: String): Double {
                 TipusIVA.General -> preu * 15 / 100
                 TipusIVA.Reduit -> preu * 6 / 100
                 TipusIVA.Superreduit -> preu * 3 / 100
+
             }
         }
         dataCompraDate.before(dataLimit4) -> {
