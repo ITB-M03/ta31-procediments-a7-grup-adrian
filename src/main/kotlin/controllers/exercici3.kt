@@ -2,49 +2,50 @@ package org.example.controllers
 
 import java.util.*
 
-
 /**
  * @author Adrián Galinsoga
  * @date 10/12/2024
  *
- * Escriu una funció anomenada “validarSuperusuari” que demani un password i
+ * Escriu una funció anomenada "validarSuperusuari" que demani un password i
  * que el comprovi amb un text emmagatzemat en una constant interna. Si no
  * coincideix l’ha de tornar a demanar un màxim de 3 vegades. La funció ha de
  * tornar si l’usuari ha encertat o no el password.
- *
  */
 
-/**
- * Funció que valida si la contrasenya introduida per l'usuari és correcta
- * @param scan Scanner per a llegir les dades de l'usuari
- * @param contrasenya contrasenya a validar
- * @return true si la contrasenya és correcta, false si no ho és
- */
-
-fun validarSuperusuari(scan: Scanner, contrasenya: String): Boolean {
-    var intents = 0 //creem la variable a 0 que serán els intents de l'usuari
-    do {
-        intents++ //cada cop que pasem pel bucle incrementem els intents
-        print("Intent $intents de 3 Introdueix la contrasenya: ") //imprimim un missatge on posen els intent
-        val intentContrasenya = scan.nextLine() // escaneig dels intents de la contrasenya
-        if (intentContrasenya == contrasenya) { //si el intent es igual a la contrasenya camnviem el boolea a true
-            return true
-        } else if (intents < 3) { //en cas de que el intents siguin majors a 3 printem el misatge de contrasenya incorrecta
-            println("Contrasenya incorrecta, torna a provar") //imprimim el mistage
-        }
-    } while (intents < 3) //sortim del do while si els intents son mes grans que 3
-    return false
+fun main() {
+    processarValidacio()
 }
 
 /**
- * Funció principal que crida a la funció validarSuperusuari
+ * Funció que gestiona el procés de validació del superusuari.
  */
-fun main() {
-    val scan = Scanner(System.`in`)
-    val contrasenya = "contrasenya"
-    if (validarSuperusuari(scan, contrasenya)) {
-        println("Contrasenya Válida")
+fun processarValidacio() {
+    val contrasenya = "contrasenya" // Contrasenya emmagatzemada internament
+    if (validarSuperusuari(contrasenya)) {
+        println("Contrasenya vàlida")
     } else {
-        println("No pots possar mes la contrasenya, bloqueig de la conta")
+        println("No pots introduir més contrasenyes. Bloqueig del compte.")
     }
+}
+
+/**
+ * Funció que valida si la contrasenya introduïda per l'usuari és correcta.
+ * @param contrasenya La contrasenya que s'ha de validar.
+ * @return true si la contrasenya és correcta, false en cas contrari.
+ */
+fun validarSuperusuari(contrasenya: String): Boolean {
+    val scan = Scanner(System.`in`)
+    var intents = 0 // Nombre d'intents realitzats per l'usuari
+    do {
+        intents++ // Incrementa el nombre d'intents
+        print("Intent $intents de 3. Introdueix la contrasenya: ")
+        val intentContrasenya = scan.nextLine() // Llegeix la contrasenya introduïda
+        if (intentContrasenya == contrasenya) {
+            return true // Retorna true si la contrasenya és correcta
+        } else if (intents < 3) {
+            println("Contrasenya incorrecta, torna a provar.")
+        }
+    } while (intents < 3) // Continua fins que es compleixin 3 intents
+
+    return false // Retorna false si no s'ha encertat la contrasenya
 }

@@ -18,9 +18,7 @@ import java.util.*
  * @param text text a mostrar
  * @param ample ample de la pantalla
  * @return text centrat
- *
  */
-
 fun titol(text: String) { //creem la funció titol amb el parametre text
     val ample = 80 //amplada de la pantalla
     val tabs = (ample - text.length) / 2 //calculem els espais que hi ha entre el text i el marge de la pantalla
